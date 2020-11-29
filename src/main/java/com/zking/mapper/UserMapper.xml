@@ -19,6 +19,13 @@
     from t_user
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
+
+
+  <select id="login" resultType="com.zking.model.User">
+    select <include refid="Base_Column_List"/> from t_user where username=
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_user
     where user_id = #{userId,jdbcType=BIGINT}
