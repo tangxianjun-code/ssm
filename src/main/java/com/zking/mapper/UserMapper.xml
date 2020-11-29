@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zking.mapper.userMapper" >
-  <resultMap id="BaseResultMap" type="com.zking.model.user" >
+<mapper namespace="com.zking.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.User" >
     <constructor >
       <idArg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -23,13 +23,13 @@
     delete from t_user
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.zking.model.user" >
+  <insert id="insert" parameterType="com.zking.model.User" >
     insert into t_user (user_id, user_name, user_pwd, 
       user_sex, user_money)
     values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
       #{userSex,jdbcType=VARCHAR}, #{userMoney,jdbcType=REAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.zking.model.user" >
+  <insert id="insertSelective" parameterType="com.zking.model.User" >
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -66,7 +66,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.user" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.User" >
     update t_user
     <set >
       <if test="userName != null" >
@@ -84,7 +84,7 @@
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zking.model.user" >
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.User" >
     update t_user
     set user_name = #{userName,jdbcType=VARCHAR},
       user_pwd = #{userPwd,jdbcType=VARCHAR},

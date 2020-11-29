@@ -1,6 +1,6 @@
 package com.zking.model;
 
-public class user {
+public class User {
     private Long userId;
 
     private String userName;
@@ -11,7 +11,7 @@ public class user {
 
     private Float userMoney;
 
-    public user(Long userId, String userName, String userPwd, String userSex, Float userMoney) {
+    public User(Long userId, String userName, String userPwd, String userSex, Float userMoney) {
         this.userId = userId;
         this.userName = userName;
         this.userPwd = userPwd;
@@ -19,7 +19,7 @@ public class user {
         this.userMoney = userMoney;
     }
 
-    public user() {
+    public User() {
         super();
     }
 
