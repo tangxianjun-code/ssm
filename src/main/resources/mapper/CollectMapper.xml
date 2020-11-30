@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.CollectMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Collect" >
+    <constructor >
+      <idArg column="collect_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="collect_user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="collect_goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="collect_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    collect_id, collect_user_id, collect_goods_id, collect_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_collect
+    where collect_id = #{collectId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_collect
+    where collect_id = #{collectId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Collect" >
+    insert into t_collect (collect_id, collect_user_id, collect_goods_id, 
+      collect_time)
+    values (#{collectId,jdbcType=BIGINT}, #{collectUserId,jdbcType=BIGINT}, #{collectGoodsId,jdbcType=BIGINT}, 
+      #{collectTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Collect" >
+    insert into t_collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        collect_id,
+      </if>
+      <if test="collectUserId != null" >
+        collect_user_id,
+      </if>
+      <if test="collectGoodsId != null" >
+        collect_goods_id,
+      </if>
+      <if test="collectTime != null" >
+        collect_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        #{collectId,jdbcType=BIGINT},
+      </if>
+      <if test="collectUserId != null" >
+        #{collectUserId,jdbcType=BIGINT},
+      </if>
+      <if test="collectGoodsId != null" >
+        #{collectGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="collectTime != null" >
+        #{collectTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Collect" >
+    update t_collect
+    <set >
+      <if test="collectUserId != null" >
+        collect_user_id = #{collectUserId,jdbcType=BIGINT},
+      </if>
+      <if test="collectGoodsId != null" >
+        collect_goods_id = #{collectGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="collectTime != null" >
+        collect_time = #{collectTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where collect_id = #{collectId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Collect" >
+    update t_collect
+    set collect_user_id = #{collectUserId,jdbcType=BIGINT},
+      collect_goods_id = #{collectGoodsId,jdbcType=BIGINT},
+      collect_time = #{collectTime,jdbcType=TIMESTAMP}
+    where collect_id = #{collectId,jdbcType=BIGINT}
+  </update>
+</mapper>

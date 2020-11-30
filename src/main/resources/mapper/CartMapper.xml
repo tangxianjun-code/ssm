@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Cart" >
+    <constructor >
+      <idArg column="cart_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="cart_goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="cart_user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="cart_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cart_id, cart_goods_id, cart_user_id, cart_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cart
+    where cart_id = #{cartId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_cart
+    where cart_id = #{cartId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Cart" >
+    insert into t_cart (cart_id, cart_goods_id, cart_user_id, 
+      cart_time)
+    values (#{cartId,jdbcType=BIGINT}, #{cartGoodsId,jdbcType=BIGINT}, #{cartUserId,jdbcType=BIGINT}, 
+      #{cartTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Cart" >
+    insert into t_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cartId != null" >
+        cart_id,
+      </if>
+      <if test="cartGoodsId != null" >
+        cart_goods_id,
+      </if>
+      <if test="cartUserId != null" >
+        cart_user_id,
+      </if>
+      <if test="cartTime != null" >
+        cart_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cartId != null" >
+        #{cartId,jdbcType=BIGINT},
+      </if>
+      <if test="cartGoodsId != null" >
+        #{cartGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="cartUserId != null" >
+        #{cartUserId,jdbcType=BIGINT},
+      </if>
+      <if test="cartTime != null" >
+        #{cartTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Cart" >
+    update t_cart
+    <set >
+      <if test="cartGoodsId != null" >
+        cart_goods_id = #{cartGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="cartUserId != null" >
+        cart_user_id = #{cartUserId,jdbcType=BIGINT},
+      </if>
+      <if test="cartTime != null" >
+        cart_time = #{cartTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cart_id = #{cartId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Cart" >
+    update t_cart
+    set cart_goods_id = #{cartGoodsId,jdbcType=BIGINT},
+      cart_user_id = #{cartUserId,jdbcType=BIGINT},
+      cart_time = #{cartTime,jdbcType=TIMESTAMP}
+    where cart_id = #{cartId,jdbcType=BIGINT}
+  </update>
+</mapper>

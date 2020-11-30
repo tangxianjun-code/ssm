@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.EvaluateMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Evaluate" >
+    <constructor >
+      <idArg column="evaluate_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="evaluate_user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="evaluate_goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="evaluate_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="evaluate_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    evaluate_id, evaluate_user_id, evaluate_goods_id, evaluate_content, evaluate_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_evaluate
+    where evaluate_id = #{evaluateId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_evaluate
+    where evaluate_id = #{evaluateId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Evaluate" >
+    insert into t_evaluate (evaluate_id, evaluate_user_id, evaluate_goods_id, 
+      evaluate_content, evaluate_time)
+    values (#{evaluateId,jdbcType=BIGINT}, #{evaluateUserId,jdbcType=BIGINT}, #{evaluateGoodsId,jdbcType=BIGINT}, 
+      #{evaluateContent,jdbcType=VARCHAR}, #{evaluateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Evaluate" >
+    insert into t_evaluate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaluateId != null" >
+        evaluate_id,
+      </if>
+      <if test="evaluateUserId != null" >
+        evaluate_user_id,
+      </if>
+      <if test="evaluateGoodsId != null" >
+        evaluate_goods_id,
+      </if>
+      <if test="evaluateContent != null" >
+        evaluate_content,
+      </if>
+      <if test="evaluateTime != null" >
+        evaluate_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaluateId != null" >
+        #{evaluateId,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateUserId != null" >
+        #{evaluateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateGoodsId != null" >
+        #{evaluateGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateContent != null" >
+        #{evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTime != null" >
+        #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Evaluate" >
+    update t_evaluate
+    <set >
+      <if test="evaluateUserId != null" >
+        evaluate_user_id = #{evaluateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateGoodsId != null" >
+        evaluate_goods_id = #{evaluateGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateContent != null" >
+        evaluate_content = #{evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTime != null" >
+        evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where evaluate_id = #{evaluateId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Evaluate" >
+    update t_evaluate
+    set evaluate_user_id = #{evaluateUserId,jdbcType=BIGINT},
+      evaluate_goods_id = #{evaluateGoodsId,jdbcType=BIGINT},
+      evaluate_content = #{evaluateContent,jdbcType=VARCHAR},
+      evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP}
+    where evaluate_id = #{evaluateId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.OrderLineMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.OrderLine" >
+    <constructor >
+      <idArg column="orderline_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orderline_order_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orderline_goods_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="orderline_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="orderline_count" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="orderline_all_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="orderline_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderline_id, orderline_order_id, orderline_goods_name, orderline_price, orderline_count, 
+    orderline_all_price, orderline_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_orderline
+    where orderline_id = #{orderlineId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_orderline
+    where orderline_id = #{orderlineId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.OrderLine" >
+    insert into t_orderline (orderline_id, orderline_order_id, orderline_goods_name, 
+      orderline_price, orderline_count, orderline_all_price, 
+      orderline_time)
+    values (#{orderlineId,jdbcType=BIGINT}, #{orderlineOrderId,jdbcType=BIGINT}, #{orderlineGoodsName,jdbcType=VARCHAR}, 
+      #{orderlinePrice,jdbcType=DECIMAL}, #{orderlineCount,jdbcType=VARCHAR}, #{orderlineAllPrice,jdbcType=DECIMAL}, 
+      #{orderlineTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.OrderLine" >
+    insert into t_orderline
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderlineId != null" >
+        orderline_id,
+      </if>
+      <if test="orderlineOrderId != null" >
+        orderline_order_id,
+      </if>
+      <if test="orderlineGoodsName != null" >
+        orderline_goods_name,
+      </if>
+      <if test="orderlinePrice != null" >
+        orderline_price,
+      </if>
+      <if test="orderlineCount != null" >
+        orderline_count,
+      </if>
+      <if test="orderlineAllPrice != null" >
+        orderline_all_price,
+      </if>
+      <if test="orderlineTime != null" >
+        orderline_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderlineId != null" >
+        #{orderlineId,jdbcType=BIGINT},
+      </if>
+      <if test="orderlineOrderId != null" >
+        #{orderlineOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderlineGoodsName != null" >
+        #{orderlineGoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderlinePrice != null" >
+        #{orderlinePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderlineCount != null" >
+        #{orderlineCount,jdbcType=VARCHAR},
+      </if>
+      <if test="orderlineAllPrice != null" >
+        #{orderlineAllPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderlineTime != null" >
+        #{orderlineTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.OrderLine" >
+    update t_orderline
+    <set >
+      <if test="orderlineOrderId != null" >
+        orderline_order_id = #{orderlineOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderlineGoodsName != null" >
+        orderline_goods_name = #{orderlineGoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderlinePrice != null" >
+        orderline_price = #{orderlinePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderlineCount != null" >
+        orderline_count = #{orderlineCount,jdbcType=VARCHAR},
+      </if>
+      <if test="orderlineAllPrice != null" >
+        orderline_all_price = #{orderlineAllPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderlineTime != null" >
+        orderline_time = #{orderlineTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where orderline_id = #{orderlineId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.OrderLine" >
+    update t_orderline
+    set orderline_order_id = #{orderlineOrderId,jdbcType=BIGINT},
+      orderline_goods_name = #{orderlineGoodsName,jdbcType=VARCHAR},
+      orderline_price = #{orderlinePrice,jdbcType=DECIMAL},
+      orderline_count = #{orderlineCount,jdbcType=VARCHAR},
+      orderline_all_price = #{orderlineAllPrice,jdbcType=DECIMAL},
+      orderline_time = #{orderlineTime,jdbcType=TIMESTAMP}
+    where orderline_id = #{orderlineId,jdbcType=BIGINT}
+  </update>
+</mapper>

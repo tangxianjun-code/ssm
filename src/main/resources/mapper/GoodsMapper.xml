@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Goods" >
+    <constructor >
+      <idArg column="goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="goods_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="good_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="goods_icon" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="goods_pref" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="goods_repertory" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="goods_count" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="goods_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="goods_status" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="goods_class_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_id, goods_name, good_price, goods_icon, goods_pref, goods_repertory, goods_count, 
+    goods_time, goods_status, goods_class_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_goods
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Goods" >
+    insert into t_goods (goods_id, goods_name, good_price, 
+      goods_icon, goods_pref, goods_repertory, 
+      goods_count, goods_time, goods_status, 
+      goods_class_id)
+    values (#{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{goodPrice,jdbcType=DECIMAL}, 
+      #{goodsIcon,jdbcType=VARCHAR}, #{goodsPref,jdbcType=VARCHAR}, #{goodsRepertory,jdbcType=BIGINT}, 
+      #{goodsCount,jdbcType=BIGINT}, #{goodsTime,jdbcType=TIMESTAMP}, #{goodsStatus,jdbcType=BIGINT}, 
+      #{goodsClassId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Goods" >
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="goodPrice != null" >
+        good_price,
+      </if>
+      <if test="goodsIcon != null" >
+        goods_icon,
+      </if>
+      <if test="goodsPref != null" >
+        goods_pref,
+      </if>
+      <if test="goodsRepertory != null" >
+        goods_repertory,
+      </if>
+      <if test="goodsCount != null" >
+        goods_count,
+      </if>
+      <if test="goodsTime != null" >
+        goods_time,
+      </if>
+      <if test="goodsStatus != null" >
+        goods_status,
+      </if>
+      <if test="goodsClassId != null" >
+        goods_class_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null" >
+        #{goodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsIcon != null" >
+        #{goodsIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPref != null" >
+        #{goodsPref,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsRepertory != null" >
+        #{goodsRepertory,jdbcType=BIGINT},
+      </if>
+      <if test="goodsCount != null" >
+        #{goodsCount,jdbcType=BIGINT},
+      </if>
+      <if test="goodsTime != null" >
+        #{goodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsStatus != null" >
+        #{goodsStatus,jdbcType=BIGINT},
+      </if>
+      <if test="goodsClassId != null" >
+        #{goodsClassId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Goods" >
+    update t_goods
+    <set >
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null" >
+        good_price = #{goodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsIcon != null" >
+        goods_icon = #{goodsIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPref != null" >
+        goods_pref = #{goodsPref,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsRepertory != null" >
+        goods_repertory = #{goodsRepertory,jdbcType=BIGINT},
+      </if>
+      <if test="goodsCount != null" >
+        goods_count = #{goodsCount,jdbcType=BIGINT},
+      </if>
+      <if test="goodsTime != null" >
+        goods_time = #{goodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsStatus != null" >
+        goods_status = #{goodsStatus,jdbcType=BIGINT},
+      </if>
+      <if test="goodsClassId != null" >
+        goods_class_id = #{goodsClassId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Goods" >
+    update t_goods
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      good_price = #{goodPrice,jdbcType=DECIMAL},
+      goods_icon = #{goodsIcon,jdbcType=VARCHAR},
+      goods_pref = #{goodsPref,jdbcType=VARCHAR},
+      goods_repertory = #{goodsRepertory,jdbcType=BIGINT},
+      goods_count = #{goodsCount,jdbcType=BIGINT},
+      goods_time = #{goodsTime,jdbcType=TIMESTAMP},
+      goods_status = #{goodsStatus,jdbcType=BIGINT},
+      goods_class_id = #{goodsClassId,jdbcType=BIGINT}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+</mapper>
